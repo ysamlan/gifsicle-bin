@@ -1,0 +1,35 @@
+[build-system]
+requires = ["scikit-build-core>=0.10"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "gifsicle-bin"
+version = "1.96"
+description = "Pre-compiled gifsicle binary for GIF optimization"
+license = {text = "GPL-2.0-only"}
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+    "Operating System :: OS Independent",
+    "Programming Language :: C",
+    "Topic :: Multimedia :: Graphics",
+]
+
+[project.urls]
+Homepage = "https://www.lcdf.org/gifsicle/"
+Source = "https://github.com/kohler/gifsicle"
+"Bug Tracker" = "https://github.com/kohler/gifsicle/issues"
+
+[tool.scikit-build]
+wheel.py-api = "py3"
+build.tool-args = ["-j6"]
+sdist.exclude = ["**/.github"]
+
+[tool.cibuildwheel]
+build = "cp39-*"
+test-command = "gifsicle --version"
+
+[tool.cibuildwheel.config-settings]

@@ -1,0 +1,3 @@
+[submodule "vendor/gifsicle"]
+	path = vendor/gifsicle
+	url = https://github.com/kohler/gifsicle.git
