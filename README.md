@@ -6,7 +6,11 @@ Install with pip/uv and get `gifsicle` in your PATH — no `brew install` or `ap
 
 ### How is this different from [pygifsicle](https://github.com/LucaCappelletti94/pygifsicle)?
 
-pygifsicle is a Python wrapper that calls gifsicle, but **requires you to install the gifsicle binary separately** (`brew install gifsicle`, `apt install gifsicle`, etc.). This package **bundles the compiled gifsicle binary itself** inside the wheel — nothing else to install. It compiles gifsicle from source for each platform via cibuildwheel.
+pygifsicle is a Python wrapper around gifsicle that **requires you to install the gifsicle binary separately** (`brew install gifsicle`, `apt install gifsicle`, etc.). Use pygifsicle if your users can be expected to have gifsicle on their system already.
+
+This package **bundles the compiled gifsicle binary itself** inside the wheel — nothing else to install. Use gifsicle-bin if you want end users to be able to use gifsicle without needing a system install at all (e.g. via `uvx` or `pip install`).
+
+Built for [agent-log-gif](https://github.com/ysamlan/agent-log-gif).
 
 ## Installation
 
