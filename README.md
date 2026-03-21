@@ -45,6 +45,8 @@ cd vendor/gifsicle && git fetch --tags && git checkout v1.XX && cd ../..
 
 Update the version in `pyproject.toml` and `config.h.cmake.in` (grep for the old version). If `configure.ac` changed between versions, check for new `HAVE_*` defines and add matching entries to `CMakeLists.txt` + `config.h.cmake.in`.
 
+To publish: `git tag 1.XX && git push origin 1.XX` — CI builds wheels for all platforms and publishes to PyPI via OIDC.
+
 ## License
 
 gifsicle is Copyright (C) 1997-2025 Eddie Kohler and distributed under the
