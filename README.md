@@ -1,5 +1,7 @@
 # gifsicle-bin
 
+[![PyPI](https://img.shields.io/pypi/v/gifsicle-bin)](https://pypi.org/project/gifsicle-bin/) [![License: GPL v2](https://img.shields.io/badge/License-GPL_v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+
 Pre-compiled [gifsicle](https://www.lcdf.org/gifsicle/) binary distributed as a Python wheel.
 
 Install with pip/uv and get `gifsicle` in your PATH — no `brew install` or `apt install` needed.
