@@ -14,4 +14,5 @@ def main() -> None:
     raise SystemExit(subprocess.call([gifsicle, *sys.argv[1:]], close_fds=False))
 
 
-main()
+if __name__ == "__main__":
+    main()
