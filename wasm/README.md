@@ -70,6 +70,11 @@ bash build.sh
 # Smoke test (requires Node.js)
 node test_wasm.mjs
 ```
+## How is this different from [gifsicle-wasm-browser](https://github.com/renzhezhilu/gifsicle-wasm-browser)?
+
+**Provenance:** `gifsicle-bin`'s WASM is built from a version-controlled submodule of the original gifsicle source in public CI.
+
+**Invocation model:** `gifsicle-bin`'s WASM exposes the raw `_run_gifsicle(argc, argv)` gifsicle CLI entry point instead of wrapping as a library. See [License](#License) for more on why we do that.
 
 ## Credits
 

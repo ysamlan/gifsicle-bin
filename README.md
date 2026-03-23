@@ -20,12 +20,6 @@ Use `pygifsicle` if you want to leverage the `gifsicle` on user's systems alread
 
 Use `gifsicle-bin` if you want end users to be able to use `gifsicle` without needing a precondition of `brew install` or `apt install`ing it, or if you want to use a deterministic version of `gifsicle`.
 
-## How is this different from [gifsicle-wasm-browser](https://github.com/renzhezhilu/gifsicle-wasm-browser)?
-
-**Provenance:** `gifsicle-bin`'s WASM is built from a version-controlled submodule of the original gifsicle source in public CI.
-
-**Invocation model:** `gifsicle-bin`'s WASM exposes the raw `_run_gifsicle(argc, argv)` gifsicle CLI entry point instead of wrapping as a library. See [License](#License) for more on why we do that.
-
 ## Manual Installation
 
 ```bash
