@@ -35,10 +35,6 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-        if: runner.os == 'Linux' && runner.arch == 'X64'
-
       - name: Build wheels
         uses: pypa/cibuildwheel@v3.3
         env:
@@ -66,9 +62,35 @@ jobs:
           name: sdist
           path: dist/*.tar.gz
 
+  build_wasm:
+    name: Build WASM
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: recursive
+
+      - name: Setup Emscripten
+        uses: pyodide/setup-emsdk@v15
+        with:
+          version: 5.0.3
+
+      - name: Build WASM
+        run: bash wasm/build.sh
+
+      - name: Test WASM
+        run: node wasm/test_wasm.mjs
+
+      - uses: actions/upload-artifact@v6
+        with:
+          name: wasm
+          path: |
+            wasm/dist/gifsicle.js
+            wasm/dist/gifsicle.wasm
+
   publish:
     name: Publish to PyPI
-    needs: [build_wheels, build_sdist]
+    needs: [build_wheels, build_sdist, build_wasm]
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
     environment:
@@ -79,9 +101,34 @@ jobs:
     steps:
       - uses: actions/download-artifact@v7
         with:
-          pattern: "*"
+          pattern: "wheels-*"
           path: dist
           merge-multiple: true
 
+      - uses: actions/download-artifact@v7
+        with:
+          name: sdist
+          path: dist
+
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
+
+  release:
+    name: Create GitHub Release
+    needs: [build_wheels, build_sdist, build_wasm]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v7
+        with:
+          name: wasm
+          path: wasm-dist
+
+      - name: Create release with WASM assets
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            wasm-dist/wasm/dist/gifsicle.js
+            wasm-dist/wasm/dist/gifsicle.wasm
