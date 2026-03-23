@@ -1,0 +1,30 @@
+{
+  "name": "gifsicle-wasm",
+  "version": "1.96.2",
+  "description": "gifsicle compiled to WebAssembly — optimize GIFs in the browser",
+  "license": "GPL-2.0-only",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ysamlan/gifsicle-bin.git",
+    "directory": "wasm"
+  },
+  "homepage": "https://github.com/ysamlan/gifsicle-bin#wasm-build",
+  "keywords": [
+    "gifsicle",
+    "gif",
+    "wasm",
+    "webassembly",
+    "optimize",
+    "emscripten"
+  ],
+  "files": [
+    "dist/gifsicle.js",
+    "dist/gifsicle.wasm"
+  ],
+  "main": "dist/gifsicle.js",
+  "type": "module",
+  "exports": {
+    ".": "./dist/gifsicle.js",
+    "./gifsicle.wasm": "./dist/gifsicle.wasm"
+  }
+}
