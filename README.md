@@ -1,6 +1,6 @@
 # gifsicle-bin
 
-[![PyPI](https://img.shields.io/pypi/v/gifsicle-bin)](https://pypi.org/project/gifsicle-bin/) [![License: GPL v2](https://img.shields.io/badge/License-GPL_v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+[![PyPI](https://img.shields.io/pypi/v/gifsicle-bin)](https://pypi.org/project/gifsicle-bin/) [![npm](https://img.shields.io/npm/v/gifsicle-wasm)](https://www.npmjs.com/package/gifsicle-wasm) [![License: GPL v2](https://img.shields.io/badge/License-GPL_v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 
 Pre-compiled [gifsicle](https://www.lcdf.org/gifsicle/) binary distributed as a Python wheel and as WASM/JS for browser use.
 
@@ -59,23 +59,7 @@ uvx gifsicle-bin
 
 ## WASM build
 
-In addition to native wheels, `gifsicle-bin` builds gifsicle as a WebAssembly module for browser use. The WASM artifacts (`gifsicle.js` + `gifsicle.wasm`) are attached to each [GitHub Release](https://github.com/ysamlan/gifsicle-bin/releases) as downloadable assets.
-
-The WASM build produces an Emscripten modularized module. Load it in JavaScript:
-
-```javascript
-const mod = await createGifsicle();
-// Write input GIF to Emscripten virtual filesystem
-mod.FS.writeFile("/input.gif", new Uint8Array(gifBuffer));
-// Run gifsicle
-mod._run_gifsicle(argc, argv);
-// Read output
-const output = mod.FS.readFile("/output.gif");
-```
-
-For a complete working example including argv construction, see [`gifsicle-worker.js`](https://github.com/ysamlan/agent-log-gif/blob/main/web/gifsicle-worker.js) in the [agent-log-gif](https://github.com/ysamlan/agent-log-gif) project.
-
-The WASM approach is based on [Simon Willison's gifsicle WASM build](https://github.com/simonw/tools) for his [tools.simonwillison.net](https://tools.simonwillison.net/) project.
+In addition to native wheels, `gifsicle-bin` builds gifsicle as a WebAssembly module for browser use. See [wasm/README.md](wasm/README.md).
 
 ## Development instructions for gifsicle-bin
 
@@ -89,19 +73,7 @@ cd vendor/gifsicle && git fetch --tags && git checkout vX.Y && cd ../..
 
 Update the version in `wasm/package.json`, `pyproject.toml` and `config.h.cmake.in` (grep for the old version). If `configure.ac` changed between versions, check for new `HAVE_*` defines and add matching entries to `CMakeLists.txt` + `config.h.cmake.in`.
 
-To publish, create a new tag and release for `vX.Y`. CI will build native wheels for all platforms (published to PyPI via OIDC) and WASM artifacts (attached to the GitHub Release).
-
-### Building WASM locally
-
-Requires [Emscripten](https://emscripten.org/docs/getting_started/downloads.html), autoconf, and automake.
-
-```bash
-bash wasm/build.sh
-# Output: wasm/dist/gifsicle.js + wasm/dist/gifsicle.wasm
-
-# Smoke test (requires Node.js)
-node wasm/test_wasm.mjs
-```
+To publish, create a new tag and release for `vX.Y`. CI will build native wheels for all platforms (published to PyPI via OIDC), and WASM artifacts (attached to the GitHub Release and published to npm via OIDC).
 
 ## License
 
@@ -118,5 +90,3 @@ as a separate program at arms length. See the FSF's
 [Plugins](https://www.gnu.org/licenses/gpl-faq.html#GPLPlugins) and
 [Proprietary Systems](https://www.gnu.org/licenses/gpl-faq.html#GPLInProprietarySystem)
 FAQs.
-
-The WASM version only provides the same command-line-argument interface as the main gifsicle binary, and can be run isolated in a separate browser worker.

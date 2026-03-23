@@ -4,7 +4,7 @@ build-backend = "scikit_build_core.build"
 
 [project]
 name = "gifsicle-bin"
-version = "1.96.2"
+version = "1.96.3"
 description = "Pre-compiled gifsicle binary for GIF optimization"
 license = {text = "GPL-2.0-only"}
 readme = "README.md"

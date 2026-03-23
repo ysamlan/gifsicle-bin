@@ -78,8 +78,11 @@ jobs:
       - name: Build WASM
         run: bash wasm/build.sh
 
-      - name: Test WASM
+      - name: Test WASM (ESM)
         run: node wasm/test_wasm.mjs
+
+      - name: Test WASM (CJS)
+        run: node wasm/test_wasm.cjs
 
       - uses: actions/upload-artifact@v6
         with:
@@ -149,7 +152,6 @@ jobs:
       - uses: actions/download-artifact@v7
         with:
           name: wasm
-          path: wasm/
 
       - uses: actions/setup-node@v6
         with:
