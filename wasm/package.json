@@ -1,6 +1,6 @@
 {
   "name": "gifsicle-wasm",
-  "version": "1.96.3",
+  "version": "1.96.4",
   "description": "gifsicle compiled to WebAssembly — optimize GIFs in the browser",
   "license": "GPL-2.0-only",
   "repository": {

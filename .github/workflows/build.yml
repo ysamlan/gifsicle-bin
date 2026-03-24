@@ -133,8 +133,8 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            wasm-dist/wasm/dist/gifsicle.js
-            wasm-dist/wasm/dist/gifsicle.wasm
+            wasm-dist/gifsicle.js
+            wasm-dist/gifsicle.wasm
 
   publish_npm:
     name: Publish to npm
@@ -152,6 +152,7 @@ jobs:
       - uses: actions/download-artifact@v7
         with:
           name: wasm
+          path: wasm/dist
 
       - uses: actions/setup-node@v6
         with:
