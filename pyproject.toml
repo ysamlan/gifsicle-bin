@@ -26,6 +26,9 @@ Homepage = "https://www.lcdf.org/gifsicle/"
 Source = "https://github.com/kohler/gifsicle"
 "Bug Tracker" = "https://github.com/kohler/gifsicle/issues"
 
+[tool.uv]
+exclude-newer = "1 week"
+
 [tool.scikit-build]
 wheel.py-api = "py3"
 cmake.build-type = "Release"
